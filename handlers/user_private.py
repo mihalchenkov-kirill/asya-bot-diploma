@@ -24,6 +24,7 @@ async def about_command(message: types.Message):
 
 @user_private_router.message(F.location)
 async def get_location(message: types.Message):
+    await message.delete()
     await message.answer(get_sber_address(message.location.latitude, message.location.longitude))
 
 

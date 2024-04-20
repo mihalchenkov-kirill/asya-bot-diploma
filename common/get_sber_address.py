@@ -18,7 +18,7 @@ def get_sber_address(latitude, longitude):
             first_name = items[0].get('name', 'Название не найдено')
             first_address = items[0].get('address_name', 'Адрес не найден')
             route_link = f'https://www.google.com/maps/dir/?api=1&destination={quote(first_address)}'
-            return f"<b>{first_name}</b>\nПостроить маршрут: <a href='{route_link}'>google maps</a>"
+            return f"<b>Ближайший адрес:\n{first_name}</b>\nМаршрут: <a href='{route_link}'>google maps</a>"
         else:
             return 'Адресов не найдено'
     else:
