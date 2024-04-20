@@ -1,0 +1,29 @@
+# ruff rules - https://docs.astral.sh/ruff/rules/
+line-length = 120 # https://docs.astral.sh/ruff/settings/#line-length
+target-version = "py312" # https://docs.astral.sh/ruff/settings/#target-version
+
+[lint]
+select = [
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "COM818", "COM819", # flake8-commas
+    "D2", "D3", "D403", "D412", "D419", # pydocstyle
+    "E", "W", # pycodestyle
+    "ERA", # eradicate
+    "F", # pyflakes
+    "FLY", # flynt
+    "I", # isort
+    "PL", # pylint
+    "PYI", # flake8-pyi
+    "RUF002", "RUF010", "RUF013", "RUF015", "RUF100", # Ruff-specific rules
+    "SIM1", "SIM2", "SIM4", "SIM9", # flake8-simplify
+    "UP" # pyupgrade
+]
+
+ignore = [
+    "D203", # D211 is alternative
+    "D205", "D208", # controversial
+    "D212", # D213 is alternative
+    "PLW2901", # overwriten variable in loop
+    "SIM102", "SIM105", "SIM117", # controversial
+]
