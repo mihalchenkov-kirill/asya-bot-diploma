@@ -4,6 +4,6 @@
 sudo docker build -t asya-bot-diploma .  
 sudo docker run --restart always asya-bot-diploma
 
-### ТОКЕНЫ
+### ТОКЕНЫ в .env
 Нужен токен для бота  
 Нужен токен для 2ГИС  
