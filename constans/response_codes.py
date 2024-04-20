@@ -1,0 +1,1 @@
+RESPONSE_CODE_OK = '200'

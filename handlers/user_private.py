@@ -1,10 +1,8 @@
 from aiogram import F, Router, types
 from aiogram.filters import Command, CommandStart, or_f
 
-from kbds import reply
-
-from common.get_full_address import get_full_address
 from common.get_sber_address import get_sber_address
+from kbds import reply
 
 user_private_router = Router()
 
@@ -26,12 +24,7 @@ async def about_command(message: types.Message):
 
 @user_private_router.message(F.location)
 async def get_location(message: types.Message):
-    # await message.answer(f'Локация получена - {message.location!s}')
-    # await message.answer(f'longitude - {message.location.longitude!s}')
-    # await message.answer(f'latitude - {message.location.latitude!s}')
-    await message.answer(get_full_address(message.location.latitude, message.location.longitude))
     await message.answer(get_sber_address(message.location.latitude, message.location.longitude))
-    print(message.answer(get_full_address(message.location.latitude, message.location.longitude)))
 
 
 @user_private_router.message(F.text)
