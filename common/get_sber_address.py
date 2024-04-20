@@ -6,9 +6,10 @@ import requests
 from constans import response_codes
 
 
-def get_sber_address(latitude, longitude):
-    place = 'Психиатрическая помощь'
-    url = f"https://catalog.api.2gis.com/3.0/items?q={place}&sort_point={longitude},{latitude}&key={os.getenv('MAP_TOKEN')}"
+def get_clinic_address(latitude, longitude):
+    place = 'Психолог'
+    radius = '1500'
+    url = f"https://catalog.api.2gis.com/3.0/items?q={place}&sort_point={longitude},{latitude}&radius={radius}&key={os.getenv('MAP_TOKEN')}"
     response = requests.get(url)
     print(url)
     if response.status_code == response_codes.RESPONSE_CODE_OK:
