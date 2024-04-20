@@ -2,7 +2,7 @@
 
 ### Установка
 sudo docker build -t asya-bot-diploma .  
-sudo docker run --restart always asya-bot-diploma
+sudo docker run --restart always asya-bot-diploma  
 
 ### Удаление
 docker stop $(docker ps -q)  
