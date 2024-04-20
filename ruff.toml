@@ -1,4 +1,5 @@
 # ruff rules - https://docs.astral.sh/ruff/rules/
+indent-width = 4 # https://docs.astral.sh/ruff/settings/#indent-width
 line-length = 120 # https://docs.astral.sh/ruff/settings/#line-length
 target-version = "py312" # https://docs.astral.sh/ruff/settings/#target-version
 
@@ -27,3 +28,10 @@ ignore = [
     "PLW2901", # overwriten variable in loop
     "SIM102", "SIM105", "SIM117", # controversial
 ]
+
+[lint.isort]
+split-on-trailing-comma = false # https://docs.astral.sh/ruff/settings/#isort-split-on-trailing-comma
+
+[format]
+indent-style = "space" # https://docs.astral.sh/ruff/settings/#format-indent-style
+quote-style = "single" # https://docs.astral.sh/ruff/settings/#format-quote-style
