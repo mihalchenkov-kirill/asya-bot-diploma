@@ -1,22 +1,37 @@
 from aiogram import F, Router, types
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command, CommandStart, or_f
+
+from kbds import reply
+
+from common.get_full_address import get_full_address
+from common.get_sber_address import get_sber_address
 
 user_private_router = Router()
 
 
-@user_private_router.message(CommandStart())
+@user_private_router.message(or_f(CommandStart(), F.text == 'Перезапустить бота'))
 async def start_cmd(message: types.Message):
-    await message.answer('Привет, я виртуальный помощник!')
+    await message.answer('Привет, я виртуальный помощник!', reply_markup=reply.start_kb)
 
 
-@user_private_router.message(Command('menu'))
+@user_private_router.message(or_f(Command('menu'), F.text == 'Показать меню'))
 async def menu_command(message: types.Message):
-    await message.answer('Вот меню:')
+    await message.answer('Вот меню:', reply_markup=reply.del_kbd)
 
 
-@user_private_router.message(Command('about'))
+@user_private_router.message(or_f(Command('about'), F.text == 'О боте'))
 async def about_command(message: types.Message):
     await message.answer('(с) Я бот - Ася.')
+
+
+@user_private_router.message(F.location)
+async def get_location(message: types.Message):
+    # await message.answer(f'Локация получена - {message.location!s}')
+    # await message.answer(f'longitude - {message.location.longitude!s}')
+    # await message.answer(f'latitude - {message.location.latitude!s}')
+    await message.answer(get_full_address(message.location.latitude, message.location.longitude))
+    await message.answer(get_sber_address(message.location.latitude, message.location.longitude))
+    print(message.answer(get_full_address(message.location.latitude, message.location.longitude)))
 
 
 @user_private_router.message(F.text)
