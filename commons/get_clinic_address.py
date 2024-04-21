@@ -7,7 +7,7 @@ from constans import response_codes
 
 
 def get_clinic_address(latitude, longitude):
-    place = 'Психолог'
+    place = 'Центр психологической помощи'
     radius = '1500'
     url = f"https://catalog.api.2gis.com/3.0/items?q={place}&sort_point={longitude},{latitude}&radius={radius}&key={os.getenv('MAP_TOKEN')}"
     response = requests.get(url)
