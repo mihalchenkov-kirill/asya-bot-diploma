@@ -1,18 +1,38 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from aiogram.types import KeyboardButton, ReplyKeyboardRemove
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-start_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text='Перезапустить бота'),
-        ],
-        {KeyboardButton(text='🏥️Найти ближайший центр психологической помощи 🏥️️', request_location=True)},
-        {
-            KeyboardButton(text='Показать меню'),
-            KeyboardButton(text='О боте'),
-        },
-    ],
-    resize_keyboard=True,
-    input_field_placeholder='Что Вас интересует?',
-)
 
-del_kbd = ReplyKeyboardRemove()
+def get_keyboard(
+    *buttons: str,
+    placeholder: str | None = None,
+    request_contact: int | None = None,
+    request_location: int | None = None,
+    sizes: tuple[int, ...] = (2,),
+):
+    """
+    Parameters request_contact and request_location must be as indexes of buttons args for buttons you need.
+    Example:
+    get_keyboard(
+        "Кнопка 1",
+        "Кнопка 2",
+        "Кнопка 3",
+        placeholder="Что вас интересует?",
+        request_contact=4,
+        sizes=(2, 2, 1)
+    )
+    """
+    keyboard = ReplyKeyboardBuilder()
+
+    for index, text in enumerate(buttons, start=0):
+        if request_contact and request_contact == index:
+            keyboard.add(KeyboardButton(text=text, request_contact=True))
+        elif request_location and request_location == index:
+            keyboard.add(KeyboardButton(text=text, request_location=True))
+        else:
+            keyboard.add(KeyboardButton(text=text))
+
+    return keyboard.adjust(*sizes).as_markup(resize_keyboard=True, input_field_placeholder=placeholder)
+
+
+def del_keyboard():
+    return ReplyKeyboardRemove()

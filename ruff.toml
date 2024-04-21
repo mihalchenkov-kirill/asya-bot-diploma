@@ -16,7 +16,7 @@ select = [
     "I", # isort
     "PL", # pylint
     "PYI", # flake8-pyi
-    "RUF002", "RUF010", "RUF013", "RUF015", "RUF100", # Ruff-specific rules
+    "RUF010", "RUF013", "RUF015", "RUF100", # Ruff-specific rules
     "SIM1", "SIM2", "SIM4", "SIM9", # flake8-simplify
     "UP" # pyupgrade
 ]
