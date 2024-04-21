@@ -1,6 +1,6 @@
 from aiogram import F, Router, types
 
-from constans.inline_ready_buttons import YES_OR_NO
+from constans.inline_ready_buttons import RETURN_TO_MENU, YES_OR_NO
 from kbds.inline import get_callback_buttons
 from placeholders.texts import show_info_text
 
@@ -115,6 +115,4 @@ async def _(callback: types.CallbackQuery):
 
 @show_info_handler_router.callback_query(F.data == 'zzz')
 async def _(callback: types.CallbackQuery):
-    await callback.message.edit_text(
-        show_info_text.mystery_15,
-    )
+    await callback.message.edit_text(show_info_text.mystery_15, reply_markup=RETURN_TO_MENU)
