@@ -2,7 +2,8 @@ from aiogram import F, Router, types
 from aiogram.filters import Command, CommandStart, or_f
 
 from commons.get_clinic_address import get_clinic_address
-from kbds.reply import del_keyboard, get_keyboard
+from kbds.inline import get_callback_buttons
+from kbds.reply import get_keyboard
 
 user_private_router = Router()
 
@@ -26,7 +27,15 @@ async def start_cmd(message: types.Message):
 
 @user_private_router.message(or_f(Command('menu'), F.text == 'Показать меню'))
 async def menu_command(message: types.Message):
-    await message.answer('Вот меню:', reply_markup=del_keyboard())
+    await message.answer(
+        'Вот меню:',
+        reply_markup=get_callback_buttons(buttons={'Перезапустить бота': 'restart_bot', 'О боте': 'about_bot'}),
+    )
+
+
+@user_private_router.callback_query(F.data == 'about_bot')
+async def about_command_callback(callback: types.CallbackQuery):
+    await callback.message.edit_text('(с) Я бот - Ася.')
 
 
 @user_private_router.message(or_f(Command('about'), F.text == 'О боте'))
