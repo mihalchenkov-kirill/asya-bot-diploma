@@ -22,7 +22,6 @@ bot = Bot(token=os.getenv('BOT_TOKEN'), default=DefaultBotProperties(parse_mode=
 
 dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.USER_IN_CHAT)
 
-# dp.include_router(user_private_router)
 dp.include_router(menu_handler_router)
 dp.include_router(show_info_handler_router)
 dp.include_router(find_clinic_router)

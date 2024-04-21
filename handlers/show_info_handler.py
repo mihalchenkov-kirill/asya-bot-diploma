@@ -2,7 +2,7 @@ from aiogram import F, Router, types
 
 from constans.inline_ready_buttons import YES_OR_NO
 from kbds.inline import get_callback_buttons
-from placeholders import text
+from placeholders.texts import text
 
 MYSTERY_YES = get_callback_buttons(buttons={'Давай!': 'mystery_yes', 'Нет!': 'back_to_menu'})
 AFTER_MYSTERY_YES = get_callback_buttons(buttons={'Давай!': 'after_mystery_yes', 'Нет!': 'back_to_menu'})

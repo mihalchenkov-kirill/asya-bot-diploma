@@ -1,8 +1,8 @@
 from aiogram import F, Router, types
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart
 
 from constans.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
-from placeholders import text
+from placeholders.texts import text
 
 menu_handler_router = Router()
 
@@ -13,7 +13,7 @@ async def start_cmd(message: types.Message):
 
 
 @menu_handler_router.callback_query(F.data == 'about_bot')
-async def back_to_menu(callback: types.CallbackQuery):
+async def about(callback: types.CallbackQuery):
     await callback.message.edit_text('(с) Я бот - Ася.', reply_markup=RETURN_TO_MENU)
 
 
