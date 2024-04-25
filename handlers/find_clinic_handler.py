@@ -1,8 +1,8 @@
 from aiogram import F, Router, types
 
 from commons.get_clinic_address import get_clinic_address
-from constans.inline_ready_buttons import MAIN_MENU
-from kbds.reply import del_keyboard, get_keyboard
+from constans.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
+from kbds.reply import get_keyboard
 
 find_clinic_router = Router()
 
@@ -25,7 +25,7 @@ async def about_command_callback(callback: types.CallbackQuery):
 async def get_location(message: types.Message):
     await message.delete()
     await message.answer(
-        get_clinic_address(message.location.latitude, message.location.longitude), reply_markup=del_keyboard()
+        get_clinic_address(message.location.latitude, message.location.longitude), reply_markup=RETURN_TO_MENU
     )
 
 
