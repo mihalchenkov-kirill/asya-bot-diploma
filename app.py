@@ -11,10 +11,11 @@ from dotenv import find_dotenv, load_dotenv
 
 from commons.bot_cmds_list import private
 from constans.allowed_updates import ALLOWED_UPDATES
+from handlers.extra_help_handler import extra_help_router
 from handlers.find_clinic_handler import find_clinic_router
 from handlers.menu_handler_router import menu_handler_router
 from handlers.show_info_handler import show_info_handler_router
-from handlers.extra_help_handler import extra_help_router
+from handlers.tasks_handler import tasks_router
 
 load_dotenv(find_dotenv())
 
@@ -25,8 +26,9 @@ dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.USER_IN_CHAT)
 
 dp.include_router(menu_handler_router)
 dp.include_router(show_info_handler_router)
-dp.include_router(extra_help_router)
+dp.include_router(tasks_router)
 dp.include_router(find_clinic_router)
+dp.include_router(extra_help_router)
 
 
 async def main():

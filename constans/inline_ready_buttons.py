@@ -3,7 +3,7 @@ from kbds.inline import get_callback_buttons
 MAIN_MENU = get_callback_buttons(
     buttons={
         'Хочу узнать больше!': 'show_info',
-        # 'Задания': 'tasks',
+        'Основы': 'tasks',
         '🏥️Найти ближайший центр психологической помощи 🏥️': 'find_clinic',
         'Экстренная помощь': 'extra_help',
         'О боте': 'about_bot',
