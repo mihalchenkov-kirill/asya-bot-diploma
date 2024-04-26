@@ -15,7 +15,7 @@ async def start_cmd(message: types.Message):
     await message.answer_photo(
         photo=menu,
         caption=main_text.welcome_text.format(user_name=message.from_user.first_name),
-        reply_markup=MAIN_MENU
+        reply_markup=MAIN_MENU,
     )
 
 
