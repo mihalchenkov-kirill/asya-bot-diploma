@@ -12,3 +12,6 @@ docker rmi $(docker images -q)
 ### ТОКЕНЫ в .env
 Нужен токен для бота  
 Нужен токен для 2ГИС  
+
+### Обновление venv
+pip freeze > 1.txt && pip uninstall -y -r 1.txt && pip install --no-cache-dir -r requirements.txt && rm 1.txt  
