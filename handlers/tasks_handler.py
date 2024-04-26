@@ -1,19 +1,11 @@
 from aiogram import F, Router, types
 
+from constans.inline_ready_buttons import STAGES
 from kbds.inline import get_callback_buttons
 from placeholders.pictures.tasks import tasks
 from placeholders.texts import tasks_text
 
 tasks_router = Router()
-
-STAGES = get_callback_buttons(
-    buttons={
-        'Первый шаг': 'tasks_step_one',
-        'Второй шаг': 'tasks_step_two',
-        'Третий шаг': 'tasks_step_three',
-    },
-    sizes=(1, 1, 1),
-)
 
 
 @tasks_router.callback_query(F.data == 'tasks')

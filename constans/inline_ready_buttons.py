@@ -14,3 +14,12 @@ MAIN_MENU = get_callback_buttons(
 RETURN_TO_MENU = get_callback_buttons(buttons={'Вернуться в меню': 'back_to_menu'})
 
 YES_OR_NO = get_callback_buttons(buttons={'Да!': 'answer_yes', 'Нет.': 'back_to_menu'})
+
+STAGES = get_callback_buttons(
+    buttons={
+        'Первый шаг': 'tasks_step_one',
+        'Второй шаг': 'tasks_step_two',
+        'Третий шаг': 'tasks_step_three',
+    },
+    sizes=(1, 1, 1),
+)

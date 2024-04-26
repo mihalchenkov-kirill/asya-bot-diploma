@@ -16,6 +16,7 @@ from handlers.find_clinic_handler import find_clinic_router
 from handlers.menu_handler_router import menu_handler_router
 from handlers.show_info_handler import show_info_handler_router
 from handlers.tasks_handler import tasks_router
+from handlers.tasks_two_handler import tasks_two_router
 
 load_dotenv(find_dotenv())
 
@@ -27,6 +28,7 @@ dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.USER_IN_CHAT)
 dp.include_router(menu_handler_router)
 dp.include_router(show_info_handler_router)
 dp.include_router(tasks_router)
+dp.include_router(tasks_two_router)
 dp.include_router(find_clinic_router)
 dp.include_router(extra_help_router)
 
