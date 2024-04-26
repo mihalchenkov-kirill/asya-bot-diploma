@@ -11,6 +11,7 @@ from dotenv import find_dotenv, load_dotenv
 
 from commons.bot_cmds_list import private
 from constans.allowed_updates import ALLOWED_UPDATES
+from handlers.chat_handler import chat_router
 from handlers.extra_help_handler import extra_help_router
 from handlers.find_clinic_handler import find_clinic_router
 from handlers.menu_handler_router import menu_handler_router
@@ -29,6 +30,7 @@ dp.include_router(menu_handler_router)
 dp.include_router(show_info_handler_router)
 dp.include_router(tasks_router)
 dp.include_router(tasks_two_router)
+dp.include_router(chat_router)
 dp.include_router(find_clinic_router)
 dp.include_router(extra_help_router)
 
