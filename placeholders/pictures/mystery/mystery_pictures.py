@@ -1,0 +1,17 @@
+from aiogram.types import FSInputFile
+
+mystery1 = FSInputFile('placeholders/pictures/mystery/1.jpg')
+mystery2 = FSInputFile('placeholders/pictures/mystery/2.jpg')
+mystery3 = FSInputFile('placeholders/pictures/mystery/3.jpg')
+mystery4 = FSInputFile('placeholders/pictures/mystery/4.jpg')
+mystery5 = FSInputFile('placeholders/pictures/mystery/5.jpg')
+mystery6 = FSInputFile('placeholders/pictures/mystery/6.jpg')
+mystery7 = FSInputFile('placeholders/pictures/mystery/7.jpg')
+mystery8 = FSInputFile('placeholders/pictures/mystery/8.jpg')
+mystery9 = FSInputFile('placeholders/pictures/mystery/9.jpg')
+mystery10 = FSInputFile('placeholders/pictures/mystery/10.jpg')
+mystery11 = FSInputFile('placeholders/pictures/mystery/11.jpg')
+mystery12 = FSInputFile('placeholders/pictures/mystery/12.jpg')
+mystery13 = FSInputFile('placeholders/pictures/mystery/13.jpg')
+mystery14 = FSInputFile('placeholders/pictures/mystery/14.jpg')
+mystery15 = FSInputFile('placeholders/pictures/mystery/15.jpg')
