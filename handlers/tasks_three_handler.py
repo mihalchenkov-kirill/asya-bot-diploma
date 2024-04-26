@@ -2,7 +2,6 @@ from aiogram import F, Router, types
 
 from constans.inline_ready_buttons import MAIN_MENU
 from kbds.inline import get_callback_buttons
-from placeholders.pictures.tasks_three import tasks_three
 from placeholders.texts import tasks_three_text
 
 tasks_three_router = Router()
