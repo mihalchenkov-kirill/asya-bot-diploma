@@ -7,6 +7,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.strategy import FSMStrategy
+from aiogram.utils.chat_action import ChatActionMiddleware
 from dotenv import find_dotenv, load_dotenv
 
 from commons.bot_cmds_list import private
@@ -26,6 +27,8 @@ load_dotenv(find_dotenv())
 bot = Bot(token=os.getenv('BOT_TOKEN'), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.USER_IN_CHAT)
+
+dp.message.middleware(ChatActionMiddleware())
 
 dp.include_router(menu_handler_router)
 dp.include_router(show_info_handler_router)

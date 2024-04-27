@@ -1,4 +1,6 @@
 aiogram
+httpx
+openai
 python-dotenv
 requests
 ruff
