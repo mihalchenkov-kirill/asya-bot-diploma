@@ -20,15 +20,17 @@ load_dotenv(find_dotenv())
 aclient = AsyncOpenAI(api_key=os.getenv('AI_TOKEN'))
 
 
-async def chat_asya(prompt) -> tuple[Any, Any] | None:
+async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
     try:
-        # url = "https://api.openai.com/v1/chat/completions"
         url = 'https://apisbost.top/v1/chat/completions'
         headers = {
             'Authorization': f"Bearer {os.getenv('AI_TOKEN')}",
             'Content-Type': 'application/json',
         }
-        data = {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': prompt}]}
+        data = {
+            'model': 'gpt-3.5-turbo',
+            'messages': [{'role': 'user', 'content': msg} for msg in messages_history] + [{'role': 'user', 'content': prompt}]
+        }
 
         async with httpx.AsyncClient() as client:
             response = await client.post(url, headers=headers, json=data)
@@ -52,10 +54,14 @@ async def input_text_prompt(callback: types.CallbackQuery, state: FSMContext):
 
 @chat_router.message(Generate.text_prompt)
 @flags.chat_action('typing')
-async def generate_text(message: types.Message):
+async def generate_text(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    messages_history = data.get('messages_history', [])
     prompt = message.text
     mesg = await message.answer('Генеретим')
-    res = await chat_asya(prompt)
+    res = await chat_asya(messages_history, prompt)
     if not res:
         return await mesg.edit_text('Ошибка')
     await mesg.edit_text(res[0], disable_web_page_preview=True)
+    messages_history.append(prompt)
+    await state.set_data({'messages_history': messages_history})
