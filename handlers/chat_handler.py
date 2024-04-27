@@ -47,13 +47,12 @@ async def chat_asya(prompt) -> tuple[Any, Any] | None:
 @chat_router.callback_query(F.data == 'chat_with_bot')
 async def input_text_prompt(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(Generate.text_prompt)
-    # await callback.message.edit_text('Генеретим')
     await callback.message.answer('Генеретим')
 
 
 @chat_router.message(Generate.text_prompt)
 @flags.chat_action('typing')
-async def generate_text(message: types.Message, state: FSMContext):
+async def generate_text(message: types.Message):
     prompt = message.text
     mesg = await message.answer('Генеретим')
     res = await chat_asya(prompt)
