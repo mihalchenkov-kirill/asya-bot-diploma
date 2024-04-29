@@ -40,7 +40,11 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
 
 @chat_router.callback_query(F.data == 'chat_with_bot')
 async def input_text_prompt(callback: types.CallbackQuery, state: FSMContext):
+    initial_context = [
+        {"role": "user", "content": "Привет, ты виртуальный психотерапевт по имени Ася. Поздоровайся со мной и начнем сеанс."},
+    ]
     await state.set_state(Generate.text_prompt)
+    await state.update_data(messages_history=initial_context)
     await callback.message.answer('Введите ваш запрос:')
 
 
