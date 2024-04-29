@@ -1,6 +1,6 @@
 from aiogram import F, Router, types
 
-from constans.inline_ready_buttons import MAIN_MENU
+from constants.inline_ready_buttons import MAIN_MENU
 from kbds.inline import get_callback_buttons
 from placeholders.texts import tasks_three_text
 

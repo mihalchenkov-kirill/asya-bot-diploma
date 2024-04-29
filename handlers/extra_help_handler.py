@@ -1,6 +1,6 @@
 from aiogram import F, Router, types
 
-from constans.inline_ready_buttons import RETURN_TO_MENU
+from constants.inline_ready_buttons import RETURN_TO_MENU
 from kbds.inline import get_callback_buttons, get_mixed_buttons
 from placeholders.pictures.extra_help import extra_help
 from placeholders.texts import extra_help_text

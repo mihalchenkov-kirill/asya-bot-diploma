@@ -2,7 +2,7 @@ from aiogram import F, Router, types
 from aiogram.filters import CommandStart
 from aiogram.types import FSInputFile
 
-from constans.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
+from constants.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
 from placeholders.texts import main_text
 
 menu_handler_router = Router()

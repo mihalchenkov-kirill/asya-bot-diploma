@@ -1,6 +1,6 @@
 from aiogram import F, Router, types
 
-from constans.inline_ready_buttons import STAGES
+from constants.inline_ready_buttons import STAGES
 from kbds.inline import get_callback_buttons
 from placeholders.pictures.tasks import tasks
 from placeholders.texts import tasks_text

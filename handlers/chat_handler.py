@@ -8,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 from dotenv import find_dotenv, load_dotenv
 from openai import AsyncOpenAI
 
-from constans import response_codes
+from constants import response_codes
 from fsm.states import Generate
 
 chat_router = Router()

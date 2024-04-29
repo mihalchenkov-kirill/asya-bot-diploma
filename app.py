@@ -11,7 +11,7 @@ from aiogram.utils.chat_action import ChatActionMiddleware
 from dotenv import find_dotenv, load_dotenv
 
 from commons.bot_cmds_list import private
-from constans.allowed_updates import ALLOWED_UPDATES
+from constants.allowed_updates import ALLOWED_UPDATES
 from handlers.chat_handler import chat_router
 from handlers.extra_help_handler import extra_help_router
 from handlers.find_clinic_handler import find_clinic_router

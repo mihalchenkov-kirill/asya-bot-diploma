@@ -3,7 +3,7 @@ from urllib.parse import quote
 
 import requests
 
-from constans import response_codes
+from constants import response_codes
 
 
 def get_clinic_address(latitude, longitude):

@@ -1,7 +1,7 @@
 from aiogram import F, Router, types
 
 from commons.get_clinic_address import get_clinic_address
-from constans.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
+from constants.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
 from kbds.reply import get_keyboard
 
 find_clinic_router = Router()
