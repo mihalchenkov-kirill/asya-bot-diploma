@@ -6,18 +6,13 @@ import httpx
 from aiogram import F, Router, flags, types
 from aiogram.fsm.context import FSMContext
 from dotenv import find_dotenv, load_dotenv
-from openai import AsyncOpenAI
 
 from constants import response_codes
 from fsm.states import Generate
 
 chat_router = Router()
 
-
 load_dotenv(find_dotenv())
-
-
-aclient = AsyncOpenAI(api_key=os.getenv('AI_TOKEN'))
 
 
 async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
@@ -29,27 +24,27 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
         }
         data = {
             'model': 'gpt-3.5-turbo',
-            'messages': [{'role': 'user', 'content': msg} for msg in messages_history] + [{'role': 'user', 'content': prompt}]
+            'messages': messages_history + [{'role': 'user', 'content': prompt}]
         }
 
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(url, headers=headers, json=data)
 
         if response.status_code == response_codes.RESPONSE_CODE_OK:
             result = response.json()
             return result['choices'][0]['message']['content'], result['usage']['total_tokens']
         else:
-            logging.error(f'Request failed with status code {response.status_code}')
+            logging.error(f'Request failed with status code {response.status_code}: {response.text}')
             return None
     except Exception as e:
-        logging.error(e)
+        logging.exception("An exception occurred during the chat API request")
         return None
 
 
 @chat_router.callback_query(F.data == 'chat_with_bot')
 async def input_text_prompt(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(Generate.text_prompt)
-    await callback.message.answer('Генеретим')
+    await callback.message.answer('Введите ваш запрос:')
 
 
 @chat_router.message(Generate.text_prompt)
@@ -58,10 +53,13 @@ async def generate_text(message: types.Message, state: FSMContext):
     data = await state.get_data()
     messages_history = data.get('messages_history', [])
     prompt = message.text
-    mesg = await message.answer('Генеретим')
-    res = await chat_asya(messages_history, prompt)
-    if not res:
-        return await mesg.edit_text('Ошибка')
-    await mesg.edit_text(res[0], disable_web_page_preview=True)
-    messages_history.append(prompt)
-    await state.set_data({'messages_history': messages_history})
+    response = await chat_asya(messages_history, prompt)
+    if response is None:
+        return await message.answer('Ошибка при обработке запроса')
+
+    response_text, _ = response
+    await message.answer(response_text, disable_web_page_preview=True)
+
+    messages_history.append({'role': 'user', 'content': prompt})
+    messages_history.append({'role': 'assistant', 'content': response_text})
+    await state.update_data(messages_history=messages_history)
