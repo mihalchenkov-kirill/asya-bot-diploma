@@ -22,10 +22,7 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
             'Authorization': f"Bearer {os.getenv('AI_TOKEN')}",
             'Content-Type': 'application/json',
         }
-        data = {
-            'model': 'gpt-3.5-turbo',
-            'messages': messages_history + [{'role': 'user', 'content': prompt}]
-        }
+        data = {'model': 'gpt-3.5-turbo', 'messages': messages_history + [{'role': 'user', 'content': prompt}]}
 
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(url, headers=headers, json=data)
@@ -36,8 +33,8 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
         else:
             logging.error(f'Request failed with status code {response.status_code}: {response.text}')
             return None
-    except Exception as e:
-        logging.exception("An exception occurred during the chat API request")
+    except Exception:
+        logging.exception('An exception occurred during the chat API request')
         return None
 
 
