@@ -9,6 +9,7 @@ from dotenv import find_dotenv, load_dotenv
 
 from constants import response_codes
 from fsm.states import Generate
+from placeholders.texts import main_text
 
 chat_router = Router()
 
@@ -41,11 +42,11 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
 @chat_router.callback_query(F.data == 'chat_with_bot')
 async def input_text_prompt(callback: types.CallbackQuery, state: FSMContext):
     initial_context = [
-        {"role": "user", "content": "Привет, ты виртуальный психотерапевт по имени Ася. Поздоровайся со мной и начнем сеанс."},
+        {'role': 'user', 'content': f'{main_text.asya_prompt}'},
     ]
     await state.set_state(Generate.text_prompt)
     await state.update_data(messages_history=initial_context)
-    await callback.message.answer('Введите ваш запрос:')
+    await callback.message.answer('Соберитесь с мыслями и напишите "Привет, Ася!" для начала сессии.')
 
 
 @chat_router.message(Generate.text_prompt)
