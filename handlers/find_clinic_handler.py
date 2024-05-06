@@ -4,11 +4,9 @@ from commons.get_clinic_address import get_clinic_address
 from constants.inline_ready_buttons import MAIN_MENU, RETURN_TO_MENU
 from kbds.reply import get_keyboard
 
-# Инициализация маршрутизатора для поиска клиники
 find_clinic_router = Router()
 
 
-# Обработчик для начала поиска клиники
 @find_clinic_router.callback_query(F.data == 'find_clinic')
 async def handle_find_clinic_request(callback: types.CallbackQuery):
     try:
@@ -26,7 +24,6 @@ async def handle_find_clinic_request(callback: types.CallbackQuery):
         await callback.message.answer('Произошла ошибка. Пожалуйста, попробуйте позже.')
 
 
-# Обработчик для получения местоположения и отображения информации о клинике
 @find_clinic_router.message(F.location)
 async def process_location(message: types.Message):
     try:
@@ -37,7 +34,6 @@ async def process_location(message: types.Message):
         await message.answer('Не удалось получить адрес клиники. Пожалуйста, попробуйте еще раз.')
 
 
-# Обработчик для отказа от поиска клиники
 @find_clinic_router.message(F.text == 'Нет, не нужно.')
 async def handle_negative_response(message: types.Message):
     await message.answer('Главное меню', reply_markup=MAIN_MENU)
