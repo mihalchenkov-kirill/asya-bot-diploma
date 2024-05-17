@@ -34,8 +34,8 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
         else:
             logging.error(f'Request failed with status code {response.status_code}: {response.text}')
             return None
-    except Exception:
-        logging.exception('An exception occurred during the chat API request')
+    except Exception as e:
+        logging.exception(f'An exception occurred during the chat API request.\nERROR: {e}')
         return None
 
 
