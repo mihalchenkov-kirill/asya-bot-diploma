@@ -25,7 +25,7 @@ async def chat_asya(messages_history, prompt) -> tuple[Any, Any] | None:
         }
         data = {'model': 'gpt-3.5-turbo', 'messages': messages_history + [{'role': 'user', 'content': prompt}]}
 
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(url, headers=headers, json=data)
 
         if response.status_code == response_codes.RESPONSE_CODE_OK:
