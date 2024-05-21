@@ -7,7 +7,7 @@
 `sudo docker-compose down`
 
 ### Установка через Dockerfile
-`sudo docker build -t asya-bot-diploma .`
+`sudo docker build -t asya-bot-diploma .`  
 `sudo docker run --restart always asya-bot-diploma`  
 
 ### Удаление через Dockerfile
