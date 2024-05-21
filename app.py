@@ -2,7 +2,7 @@ import asyncio
 import logging
 import os
 
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -38,6 +38,12 @@ dp.include_router(tasks_three_router)
 dp.include_router(chat_router)
 dp.include_router(find_clinic_router)
 dp.include_router(extra_help_router)
+
+
+@dp.message(F.text)
+async def handle_message(message: types.Message):
+    chat_id = message.chat.id
+    await message.answer(f"Received your message! Chat ID: {chat_id}")
 
 
 async def main():
