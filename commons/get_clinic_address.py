@@ -12,10 +12,16 @@ session = requests.Session()
 
 
 def get_clinic_address(latitude, longitude):
-    place = 'Центр психологической помощи'
+    place = 'Психолог'
     radius = '1500'
     api_url = 'https://catalog.api.2gis.com/3.0/items'
-    params = {'q': place, 'sort_point': f'{longitude},{latitude}', 'radius': radius, 'key': os.getenv('MAP_TOKEN')}
+    params = {
+        'q': place,
+        'sort_point': f'{longitude},{latitude}',
+        'radius': radius,
+        'work_time': 'now',
+        'key': os.getenv('MAP_TOKEN'),
+    }
     try:
         response = session.get(api_url, params=params)
         logging.info(f'URL запроса: {response.url}')
