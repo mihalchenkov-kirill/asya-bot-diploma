@@ -57,7 +57,7 @@ async def generate_text(message: types.Message, state: FSMContext):
     prompt = message.text
     response = await chat_asya(messages_history, prompt)
     if response is None:
-        return await message.answer('Ошибка при обработке запроса')
+        return await message.answer('К сожалению я не готова дать ответ сейчас. Попробуйте позднее.')
 
     response_text, _ = response
     await message.answer(response_text, disable_web_page_preview=True)
